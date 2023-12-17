@@ -1,0 +1,68 @@
+<!-- account_transactions.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transactions for Account {{ account_number }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            background-color: #35b234;
+            color: white;
+            padding: 20px;
+            margin-top: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Transactions for Account {% if account_number %}{{ account_number }}{% endif %}</h1>
+    {% if transactions %}
+        <table>
+            <tr>
+                <th>Account Origin</th>
+                <th>Account Beneficiary</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.account_origin }}</td>
+                <td>{{ transaction.account_beneficiary }}</td>
+                <td>{{ transaction.amount }}</td>
+                <td>{{ transaction.date }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No transactions available.</p>
+    {% endif %}    
+    <div class="uk-margin">
+        <a href="{{ url_for('dashboard_choice') }}" class="uk-button uk-button-default" style="background-color: #35b234; color: white">Go Back</a>
+    </div>
+</body>
+</html>

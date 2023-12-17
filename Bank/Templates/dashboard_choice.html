@@ -1,0 +1,65 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.14.3/dist/css/uikit.min.css" />
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.14.3/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.14.3/dist/js/uikit-icons.min.js"></script>
+    <title>HhessBC | Dashboard</title>
+</head>
+<body>
+    <div class="uk-margin uk-card-default uk-card-body" style="background-color: #35b234 ; color: white">
+        <div class="uk-text-small">
+            First Name: {{data["firstname"]}}<br>Last Name: {{data["lastname"]}}<br>
+        </div>
+        <div class="uk-text-large">
+            HhessBC<br>Current Balance: ${{data ["currentbalance"]}}<br>Saving Balance: ${{data ["savingbalance"]}}
+        </div>
+        <div class="uk-text-normal">
+            Account Number: {{data["accountNumber"]}}
+        </div>
+    </div>
+    {% with messages = get_flashed_messages (with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div uk-alert style="margin: 1rem;" class="uk-alert-{{category}}">
+        {{message}}
+        <a class="uk-alert-close" uk-close></a>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <form class="uk-padding" method="POST" action="{{ url_for('save_use_money_page') }}">
+        <fieldset class="uk-fieldset">
+            <button class="uk-button uk-button-default" type="submit" style="background-color: #35b234; color: white">
+                Move Money
+            </button>
+        </fieldset>
+    </form>
+    <form class="uk-padding" method="POST" action="{{ url_for('account_transactions', account_number=data['accountNumber']) }}">
+        <fieldset class="uk-fieldset">
+            <button class="uk-button uk-button-default" type="submit" style="background-color: #35b234; color: white">
+                See Transactions
+            </button>
+        </fieldset>
+    </form>
+    <form class="uk-padding" action="/" method="get" onsubmit="preventGoingBack()">
+        <fieldset class="uk-fieldset">
+            <button class="uk-button uk-button-default" type="submit" style="background-color: #35b234; color: white">
+                Log Out
+            </button>
+        </fieldset>
+    </form>
+    <script>
+        function preventGoingBack() {
+            window.location.replace('/user_choice');
+            return false;
+        }
+    </script>
+</body>
+</html>

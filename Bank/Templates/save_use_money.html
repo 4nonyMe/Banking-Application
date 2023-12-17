@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.14.3/dist/css/uikit.min.css" />
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.14.3/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.14.3/dist/js/uikit-icons.min.js"></script>
+    <title>HhessBC | Dashboard</title>
+</head>
+<body>
+    <div class="uk-margin uk-card-default uk-card-body uk-card uk-card-hover uk-card-small" style="background-color: #35b234; color: white; border: 32px solid white; border-radius: 8px; text-align: center;">
+        <div class="uk-text-large">
+            HhessBC
+        </div>
+        <div class="uk-text-normal">
+            First Name: {{data["firstname"]}}<br>Last Name: {{data["lastname"]}}<br>
+            Current Balance: ${{data["currentbalance"]}}<br>Saving Balance: ${{data["savingbalance"]}}<br>
+            Account Number: {{data["accountNumber"]}}
+        </div>
+    </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div uk-alert style="margin: 1rem;" class="uk-alert-{{category}}">
+        {{message}}
+        <a class="uk-alert-close" uk-close></a>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <form class="uk-padding" action="{{ url_for('save_use_money_page')}}" method="post">
+        <fieldset class="uk-fieldset">
+            <legend class="uk-legend">Move Money</legend>
+            <div class="uk-margin">
+                <label class="uk-form-label" for="amount">Amount ($):</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input" name="amount" type="text" placeholder="Enter amount" required>
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="move_type">Save or Import:</label>
+                <div class="uk-form-controls">
+                    <select class="uk-select" id="move_type" name="move_type">
+                        <option value="save">Save</option>
+                        <option value="import">Import</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <button class="uk-button uk-button-default" type="submit" style="background-color: #35b234; color: white">Send</button>
+            </div>
+            <div class="uk-margin">
+                <a href="{{ url_for('dashboard_choice') }}" class="uk-button uk-button-default" style="background-color: #35b234; color: white">Go Back</a>
+            </div>
+        </fieldset>
+    </form>
+</body>
+</html>

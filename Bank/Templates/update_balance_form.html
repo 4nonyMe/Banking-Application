@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Balance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            background-color: #35b234;
+            color: white;
+            padding: 20px;
+            margin-top: 0;
+        }
+
+        form {
+            max-width: 300px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        input[type="submit"],
+        .uk-button {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            text-decoration: none;  /* Remove underlines from anchor tags */
+            display: inline-block;
+            cursor: pointer;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        input[type="submit"],
+        .uk-button {
+            background-color: #35b234;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        input[type="submit"]:hover,
+        .uk-button:hover {
+            background-color: #2c7d2c;
+        }
+        
+        input[type="submit"],
+        .uk-button {
+        background-color: #35b234;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px; /* Adjust the font size as needed */
+        }
+    </style>
+</head>
+<body>
+    <h1>Update Balance</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <form action="{{ url_for('update_balance_page') }}" method="post">
+        <label for="account_number">Account Number:</label><br>
+        <input type="text" id="account_number" name="account_number" required><br>
+
+        <label for="pin">PIN:</label><br>
+        <input type="text" id="pin" name="pin" required><br>
+
+        <label for="amount">Amount:</label><br>
+        <input type="number" id="amount" name="amount" step=0.01 required><br>
+
+        <label for="operation">Operation:</label><br>
+        <select id="operation" name="operation">
+            <option value="add">Add</option>
+            <option value="subtract">Subtract</option>
+        </select><br>
+
+        <label for="account_type">Account Type:</label><br>
+        <select id="account_type" name="account_type">
+            <option value="current">Current</option>
+            <option value="saving">Saving</option>
+        </select><br>
+
+        <input type="submit" value="Submit">
+        <a href="{{ url_for('employee_view') }}" class="uk-button" style="background-color: #35b234; color: white">Go Back</a>
+    </form>
+</body>
+</html>

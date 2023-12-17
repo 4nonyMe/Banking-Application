@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking App - Employee View</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            background-color: #35b234;
+            color: white;
+            padding: 20px;
+            margin-top: 0;
+            border-radius: 8px 8px 0 0;
+        }
+
+        h2, h3 {
+            color: #555;
+        }
+
+        form {
+            max-width: 300px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, button {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #35b234;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            button:hover {
+                background-color: #2c7d2c;
+            }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to the Banking App - Employee View</h1>
+
+    <h2>Functions:</h2>
+
+    <form action="/create_customer_form" method="get">
+        <label for="create_customer">Create Customer:</label>
+        <button type="submit">Create</button>
+    </form>
+
+    <form action="/delete_client" method="get">
+        <label for="delete_client">Delete Client:</label>
+        <button type="submit">Delete</button>
+    </form>
+
+    <form action="/update_balance" method="post">
+        <h3>Update Balance:</h3>
+        <button type="submit" id="add_transaction">Update</button>
+    </form>
+
+    <form action="/customer_data" method="get">
+        <h3>Customer Data:</h3>
+        <button type="submit">List Customers</button>
+    </form>
+    
+    <form action="/" method="get" onsubmit="preventGoingBack()">
+        <h3>Log Out:</h3>
+        <button type="submit">Log Out</button>
+    </form>
+    <script>
+        function preventGoingBack() {
+            window.location.replace('/user_choice');
+            return false;
+        }
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Client</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            background-color: #35b234;
+            color: white;
+            padding: 20px;
+            margin-top: 0;
+            border-radius: 8px 8px 0 0;
+        }
+
+        form {
+            max-width: 300px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="submit"],
+        button {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"],
+        button {
+            background-color: #35b234;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover,
+        button:hover {
+            background-color: #2c7d2c;
+        }
+    </style>
+</head>
+<body>
+    <h1>Delete Client</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div uk-alert style="margin: 1rem;" class="uk-alert-{{category}}">
+        {{message}}
+        <a class="uk-alert-close" uk-close></a>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <form action="/delete_client" method="post">
+        <label for="account_number">Account Number:</label>
+        <input type="text" id="account_number" name="account_number" required>
+
+        <label for="pin">PIN:</label>
+        <input type="password" id="pin" name="pin" required>
+
+        <input type="submit" value="Delete Client">
+    </form>
+    <form action="/employee_view" method="get">
+        <button type="submit" style="background-color: #35b234; color: white">Go Back</button>
+    </form>
+</body>
+</html>
